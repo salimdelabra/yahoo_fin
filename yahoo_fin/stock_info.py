@@ -370,12 +370,10 @@ def get_stats_valuation(ticker, headers = {'User-agent': 'Mozilla/5.0'}):
 def _parse_json(url, headers = {'User-agent': 'Mozilla/5.0'}):
     html = requests.get(url=url, headers = headers).text
 
-    json_str = html.split('root.App.main =')[1].split(
-        '(this)')[0].split(';\n}')[0].strip()
+    json_str = html.split('root.App.main =')[1].split('(this)')[0].split(';\n}')[0].strip()
     
     try:
-        data = json.loads(json_str)[
-            'context']['dispatcher']['stores']['QuoteSummaryStore']
+        data = json.loads(json_str)['context']['dispatcher']['stores']['QuoteSummaryStore']
     except:
         return '{}'
     else:
